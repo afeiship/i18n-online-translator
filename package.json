@@ -1,0 +1,32 @@
+{
+  "name": "@feizheng/i18next-online-scanner",
+  "version": "1.0.0",
+  "description": "I18n-scanner + online translate.",
+  "homepage": "https://github.com/afeiship/i18next-online-scanner",
+  "author": {
+    "name": "afei",
+    "email": "1290657123@qq.com"
+  },
+  "scripts": {
+    "build": "gulp",
+    "test": "jest"
+  },
+  "main": "dist/index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@feizheng/next-nice-comments": "^1.0.0",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-header": "^2.0.7",
+    "gulp-load-plugins": "^2.0.1",
+    "gulp-size": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "jest": "^24.8.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "i18next-scanner": "^2.10.3"
+  }
+}
