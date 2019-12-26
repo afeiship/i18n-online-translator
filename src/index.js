@@ -25,12 +25,12 @@ var options = {
 var Parser = require('i18next-scanner').Parser;
 var parser = new Parser(options);
 var code = fs.readFileSync('./__tests__/app/component1.js');
+
 // console.log('code', code);
 parser.parseFuncFromString(code);
 var res = parser.get();
 var SAP = '😀';
 var enKeys = Object.keys(res.en.translation).join(SAP);
-var cnKeys = Object.keys(res.zh_CN.translation).join(SAP);
 var cntKeys = Object.keys(res.zh_TW.translation).join(SAP);
 
 var reqs = [
@@ -47,7 +47,7 @@ var fns = reqs.map((req) => {
   };
 });
 
-var nxQueue = new nx.Queue(fns);
+var nxQueue = new NxQueue(fns);
 nxQueue.start().then(({ status, data }) => {
   if (status === 'done') {
     console.log(JSON.stringify(data, null, 4));
