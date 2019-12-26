@@ -27,6 +27,10 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "i18next-scanner": "^2.10.3"
+    "@feizheng/next-baidu-fanyi": "^1.0.0",
+    "@feizheng/next-js-core2": "^2.0.5",
+    "@feizheng/next-queue": "^1.0.0",
+    "i18next-scanner": "^2.10.3",
+    "sleep": "^6.1.0"
   }
 }
