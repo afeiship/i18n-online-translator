@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "gulp",
-    "test": "jest"
+    "test": "jest",
+    "example": "node ./examples/basic"
   },
   "main": "dist/index.js",
   "license": "MIT",
