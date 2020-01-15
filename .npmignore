@@ -10,4 +10,7 @@ gulpfile.js
 
 .editorconfig
 .npmrc
-.prettoerrc
+.prettierrc
+apis
+assets
+examples
