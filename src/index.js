@@ -1,55 +1,74 @@
 var fs = require('fs');
-var nx = require('@feizheng/next-js-core2');
-var NxFangyi = require('@feizheng/next-baidu-fanyi');
-var NxQueue = require('@feizheng/next-queue');
-var sleep = require('sleep');
-var options = {
-  debug: false,
-  func: {
-    list: ['i18n.t'],
-    extensions: ['.js']
+var appRoot = require('app-root-path').path;
+var safeAssign = require('safe-assign');
+var path = require('path');
+
+// next packages
+require('@feizheng/next-js-core2');
+require('@feizheng/next-baidu-fanyi');
+require('@feizheng/next-queue');
+require('@feizheng/next-list2map');
+
+/* prettier-ignore */
+var RETURN_VALUE = function(inValue) { return inValue.data; };
+var DEFAULT_OPTIONS = {
+  input: '/assets/locale/original.json',
+  output: '/assets/locale/dist',
+  tab: 2,
+  from: 'zh',
+  langs: {
+    en: 'en',
+    zh: 'zh_CN',
+    cht: 'zh_TW'
   },
-  trans: null,
-  lngs: ['en', 'zh_CN', 'zh_TW'],
-  defaultLng: 'en',
-  resource: {
-    loadPath: 'dist/locale/{{lng}}.json',
-    savePath: 'dist/locale/{{lng}}.json',
-    jsonIndent: 2,
-    lineEnding: '\n'
-  },
-  nsSeparator: false
+  filter: RETURN_VALUE,
+  engineOptions: null
 };
 
-// module.exports = function() {
-var Parser = require('i18next-scanner').Parser;
-var parser = new Parser(options);
-var code = fs.readFileSync('./__tests__/app/component1.js');
+module.exports = function(inOptions) {
+  var options = nx.mix(null, DEFAULT_OPTIONS, inOptions);
+  var input = path.join(appRoot, options.input);
+  var output = path.join(appRoot, options.output);
+  var keys = Object.keys(require(input));
+  var requests = [];
 
-// console.log('code', code);
-parser.parseFuncFromString(code);
-var res = parser.get();
-var SAP = '😀';
-var enKeys = Object.keys(res.en.translation).join(SAP);
-var cntKeys = Object.keys(res.zh_TW.translation).join(SAP);
+  var initialized = false;
 
-var reqs = [
-  { q: enKeys, to: 'en' },
-  { q: cntKeys, to: 'cht' }
-];
-
-var fns = reqs.map((req) => {
-  return (done) => {
-    sleep.sleep(1);
-    NxFangyi.translate(req).then((res) => {
-      done(res);
-    });
-  };
-});
-
-var nxQueue = new NxQueue(fns);
-nxQueue.start().then(({ status, data }) => {
-  if (status === 'done') {
-    console.log(JSON.stringify(data, null, 4));
+  if (!fs.existsSync(output)) {
+    fs.mkdirSync(output);
+    initialized = true;
   }
-});
+
+  // requets
+  nx.forIn(options.langs, function(key, value) {
+    requests.push({
+      data: nx.mix(
+        {
+          q: keys.join('\n'),
+          from: options.from,
+          to: key,
+          delay: 1200
+        },
+        options.engineOptions
+      ),
+      output: path.join(output, value + '.json')
+    });
+  });
+
+  var items = requests.map(function(request) {
+    return function(next) {
+      return nx.BaiduFanyi.translate(request.data).then(function(res) {
+        var filtered = options.filter({ data: res.trans_result, config: request });
+        var old = !initialized ? require(request.output) : null;
+        var translated = nx.list2map(filtered, { key: 'src', value: 'dst' });
+        var data = safeAssign(translated, old);
+        var buffered = JSON.stringify(data, null, options.tab);
+        fs.writeFileSync(request.output, buffered);
+        next();
+      });
+    };
+  });
+
+  // start translate
+  return nx.Queue.run(items);
+};

@@ -27,10 +27,12 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@feizheng/next-baidu-fanyi": "^1.0.0",
-    "@feizheng/next-js-core2": "^2.0.5",
-    "@feizheng/next-queue": "^1.0.0",
+    "@feizheng/next-baidu-fanyi": "^1.2.0",
+    "@feizheng/next-js-core2": "^2.2.2",
+    "@feizheng/next-list2map": "^1.0.0",
+    "@feizheng/next-queue": "^1.5.0",
+    "app-root-path": "^3.0.0",
     "i18next-scanner": "^2.10.3",
-    "sleep": "^6.1.0"
+    "safe-assign": "^0.1.3"
   }
 }
