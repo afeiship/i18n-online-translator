@@ -22,7 +22,7 @@ var DEFAULT_OPTIONS = {
     cht: 'zh_TW'
   },
   filter: RETURN_VALUE,
-  engineOptions: null
+  apiOptions: null
 };
 
 module.exports = function(inOptions) {
@@ -31,7 +31,6 @@ module.exports = function(inOptions) {
   var output = path.join(appRoot, options.output);
   var keys = Object.keys(require(input));
   var requests = [];
-
   var initialized = false;
 
   if (!fs.existsSync(output)) {
@@ -49,7 +48,7 @@ module.exports = function(inOptions) {
           to: key,
           delay: 1200
         },
-        options.engineOptions
+        options.apiOptions
       ),
       output: path.join(output, value + '.json')
     });
