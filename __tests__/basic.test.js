@@ -4,8 +4,9 @@ var appRoot = require('app-root-path').path;
 describe('Basic test', () => {
   test('test initialized:', (done) => {
     i18nextOnlineScanner({
-      input: '__tests__/locale/original.json',
-      output: '__tests__/locale/dist'
+      context: `${appRoot}/__tests__/locale`,
+      input: 'original.json',
+      output: 'dist'
     }).then((res) => {
       expect(res).toEqual([]);
       done();

@@ -12,8 +12,9 @@ require('@feizheng/next-list2map');
 /* prettier-ignore */
 var RETURN_VALUE = function(inValue) { return inValue.data; };
 var DEFAULT_OPTIONS = {
-  input: '/assets/locale/original.json',
-  output: '/assets/locale/dist',
+  context: appRoot,
+  input: 'original.json',
+  output: 'dist',
   tab: 2,
   from: 'zh',
   langs: {
@@ -27,8 +28,8 @@ var DEFAULT_OPTIONS = {
 
 module.exports = function(inOptions) {
   var options = nx.mix(null, DEFAULT_OPTIONS, inOptions);
-  var input = path.join(appRoot, options.input);
-  var output = path.join(appRoot, options.output);
+  var input = path.join(options.context, options.input);
+  var output = path.join(options.context, options.output);
   var keys = Object.keys(require(input));
   var requests = [];
   var initialized = false;
