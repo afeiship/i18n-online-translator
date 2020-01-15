@@ -3,7 +3,7 @@
 
 ## installation
 ```shell
-npm install -S @feizheng/i18next-online-scanner 
+npm install -S @feizheng/i18next-online-scanner
 ```
 
 ## options
