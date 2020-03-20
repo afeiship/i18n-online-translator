@@ -1,7 +1,7 @@
 /*!
  * name: @feizheng/i18n-online-translator
  * url: https://github.com/afeiship/i18n-online-translator
- * version: 1.2.0
+ * version: 1.2.1
  * license: MIT
  */
 
