@@ -28,7 +28,6 @@ i18nOnlineTranslator({
 });
 ```
 
-## results
 ```conf
 .
 ├── assets
