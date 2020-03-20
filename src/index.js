@@ -17,7 +17,7 @@ var DEFAULT_OPTIONS = {
   output: 'dist',
   tab: 2,
   from: 'zh',
-  langs: {
+  lang: {
     en: 'en',
     zh: 'zh_CN',
     cht: 'zh_TW'
@@ -40,7 +40,7 @@ module.exports = function(inOptions) {
   }
 
   // requets
-  nx.forIn(options.langs, function(key, value) {
+  nx.forIn(options.lang, function(key, value) {
     requests.push({
       data: nx.mix(
         {
