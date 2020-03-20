@@ -1,9 +1,9 @@
-# i18next-online-scanner
+# i18n-online-translator
 > I18n-scanner + online translate.
 
 ## installation
 ```shell
-npm install -S @feizheng/i18next-online-scanner
+npm install -S @feizheng/i18n-online-translator
 ```
 
 ## options
@@ -20,9 +20,9 @@ npm install -S @feizheng/i18next-online-scanner
 
 ## usage
 ```js
-const i18nextOnlineScanner = require('@feizheng/i18next-online-scanner');
+const i18nOnlineTranslator = require('@feizheng/i18n-online-translator');
 
-i18nextOnlineScanner({
+i18nOnlineTranslator({
   input: './examples/basic/assets/org.json',
   output: './examples/basic/assets/dist'
 });

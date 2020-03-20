@@ -1,8 +1,8 @@
 {
-  "name": "@feizheng/i18next-online-scanner",
+  "name": "@feizheng/i18n-online-translator",
   "version": "1.2.0",
   "description": "I18n-scanner + online translate.",
-  "homepage": "https://github.com/afeiship/i18next-online-scanner",
+  "homepage": "https://github.com/afeiship/i18n-online-translator",
   "author": {
     "name": "afei",
     "email": "1290657123@qq.com"

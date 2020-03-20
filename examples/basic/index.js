@@ -1,6 +1,6 @@
-var onlineScanner = require('../../src');
+var i18nOnlineTranslator = require('../../src');
 
-onlineScanner({
+i18nOnlineTranslator({
   input: './examples/basic/assets/org.json',
   output: './examples/basic/assets/dist'
 });

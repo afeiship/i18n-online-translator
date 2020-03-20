@@ -1,6 +1,6 @@
 /*!
- * name: @feizheng/i18next-online-scanner
- * url: https://github.com/afeiship/i18next-online-scanner
+ * name: @feizheng/i18n-online-translator
+ * url: https://github.com/afeiship/i18n-online-translator
  * version: 1.2.0
  * license: MIT
  */
