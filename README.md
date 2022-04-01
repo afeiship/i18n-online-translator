@@ -8,19 +8,19 @@ npm install -S @jswork/i18n-online-translator
 
 ## options
 | api        | type     | default                                 | description                    |
-| ---------- | -------- | --------------------------------------- | ------------------------------ |
-| context    | String   | ${appRoot}                              | The base path for input/output |
+|------------| -------- |-----------------------------------------| ------------------------------ |
+| cwd        | String   | `process.cwd()`                         | The base path for input/output |
 | input      | String   | /assets/locale/original.json            | Original file path             |
 | ouput      | String   | /assets/locale/dist                     | Translated folder path         |
 | tab        | Number   | 2                                       | JSON format tab                |
 | from       | String   | zh                                      | From which language            |
-| lang      | Object   | { en: 'en', zh: 'zh_CN', cht: 'zh_TW' } | Translate to languages         |
+| lang       | Object   | { en: 'en', zh: 'zh_CN', cht: 'zh_TW' } | Translate to languages         |
 | filter     | Function | ({ data, config})=>{ return data;}      | Filter the result              |
 | apiOptions | Object   | { appid:null, secret:null}              | Baidu fanyi opitons            |
 
 ## usage
 ```js
-const i18nOnlineTranslator = require('@feizheng/i18n-online-translator');
+const i18nOnlineTranslator = require('@jswork/i18n-online-translator');
 
 i18nOnlineTranslator({
   input: './examples/basic/assets/org.json',
