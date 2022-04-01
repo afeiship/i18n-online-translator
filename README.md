@@ -3,7 +3,7 @@
 
 ## installation
 ```shell
-npm install -S @feizheng/i18n-online-translator
+npm install -S @jswork/i18n-online-translator
 ```
 
 ## options

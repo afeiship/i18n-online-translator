@@ -4,15 +4,17 @@ var safeAssign = require('safe-assign');
 var path = require('path');
 
 // next packages
-require('@feizheng/next-js-core2');
-require('@feizheng/next-baidu-fanyi');
-require('@feizheng/next-queue');
-require('@feizheng/next-list2map');
+require('@jswork/next');
+require('@jswork/next-baidu-fanyi');
+require('@jswork/next-async-queue');
+require('@jswork/next-list2map');
 
 /* prettier-ignore */
-var RETURN_VALUE = function(inValue) { return inValue.data; };
-var DEFAULT_OPTIONS = {
-  context: appRoot,
+var RETURN_VALUE = function(inValue) {
+  return inValue.data;
+};
+var defaults = {
+  cwd: appRoot,
   input: 'original.json',
   output: 'dist',
   tab: 2,
@@ -27,9 +29,9 @@ var DEFAULT_OPTIONS = {
 };
 
 module.exports = function(inOptions) {
-  var options = nx.mix(null, DEFAULT_OPTIONS, inOptions);
-  var input = path.join(options.context, options.input);
-  var output = path.join(options.context, options.output);
+  var options = nx.mix(null, defaults, inOptions);
+  var input = path.join(options.cwd, options.input);
+  var output = path.join(options.cwd, options.output);
   var keys = Object.keys(require(input));
   var requests = [];
   var initialized = false;
@@ -41,6 +43,7 @@ module.exports = function(inOptions) {
 
   // requets
   nx.forIn(options.lang, function(key, value) {
+    var outputFile = path.join(output, value + '.json');
     requests.push({
       data: nx.mix(
         {
@@ -51,7 +54,7 @@ module.exports = function(inOptions) {
         },
         options.apiOptions
       ),
-      output: path.join(output, value + '.json')
+      output: outputFile
     });
   });
 
@@ -59,7 +62,10 @@ module.exports = function(inOptions) {
     return function(next) {
       return nx.BaiduFanyi.translate(request.data).then(function(res) {
         var filtered = options.filter({ data: res.trans_result, config: request });
-        var old = !initialized ? require(request.output) : null;
+        var old = null;
+        if (!initialized && fs.existsSync(request.output)) {
+          old = require(request.output);
+        }
         var translated = nx.list2map(filtered, { key: 'src', value: 'dst' });
         var data = safeAssign(translated, old);
         var buffered = JSON.stringify(data, null, options.tab);
@@ -70,5 +76,5 @@ module.exports = function(inOptions) {
   });
 
   // start translate
-  return nx.Queue.run(items);
+  return nx.AsyncQueue.run(items);
 };

@@ -3,12 +3,12 @@
 
   const gulp = require('gulp');
   const pkg = require('../package.json');
-  const nx = require('@feizheng/next-js-core2');
+  const nx = require('@jswork/next');
   const $ = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'gulp.*', 'del']
   });
 
-  require('@feizheng/next-nice-comments');
+  require('@jswork/next-nice-comments');
 
   const niceComments = nx.niceComments(
     [
