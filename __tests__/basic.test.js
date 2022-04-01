@@ -1,12 +1,13 @@
 const i18nextOnlineScanner = require('../src');
-var appRoot = require('app-root-path').path;
+const path = require('path');
 
 jest.setTimeout(50 * 1000);
 
 describe('Basic test', () => {
   test('test initialized:', (done) => {
+    const cwd = path.join(process.cwd(), '__tests__/locale');
     i18nextOnlineScanner({
-      cwd: `${appRoot}/__tests__/locale`,
+      cwd,
       input: 'original.json',
       output: 'dist'
     }).then((res) => {
