@@ -23,7 +23,7 @@ const defaults = {
   apiOptions: null
 };
 
-module.exports = function(inOptions) {
+module.exports = function (inOptions) {
   const options = nx.mix(null, defaults, inOptions);
   const input = path.join(options.cwd, options.input);
   const output = path.join(options.cwd, options.output);
@@ -35,7 +35,7 @@ module.exports = function(inOptions) {
     initialized = true;
   }
 
-  const requests = options.to.map(item => {
+  const requests = options.to.map((item) => {
     return {
       data: nx.mix(
         {
@@ -50,9 +50,9 @@ module.exports = function(inOptions) {
     };
   });
 
-  const items = requests.map(function(request) {
-    return function(next) {
-      return nx.BaiduFanyi.translate(request.data).then(function(res) {
+  const items = requests.map(function (request) {
+    return function (next) {
+      return nx.BaiduFanyi.translate(request.data).then(function (res) {
         const filtered = options.filter({ data: res.trans_result, config: request });
         let old = null;
         if (!initialized && fs.existsSync(request.output)) {
