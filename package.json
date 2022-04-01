@@ -32,7 +32,6 @@
     "@jswork/next-async-queue": "^1.0.0",
     "@jswork/next-baidu-fanyi": "^1.0.1",
     "@jswork/next-list2map": "^1.0.0",
-    "app-root-path": "^3.0.0",
     "i18next-scanner": "^2.11.0",
     "safe-assign": "^0.1.3"
   }
